@@ -1,0 +1,45 @@
+game_name: 'pong'
+device: 'cpu'  # make sure using `cuda` on GPU servers
+screen_size: 84
+frame_skip: 4
+terminal_on_life_loss: False
+sticky_actions: False
+repeat_action_probability: 0.0
+rendering: False
+random_seed: 1
+
+num_experiments: 1
+num_epochs: 201
+is_learning: True
+steps_per_epoch: 250000
+max_start_nullops: 30
+is_testing: True
+steps_per_test: 5000
+episode_max_len: 5000
+folder_location: './results/'
+folder_name: 'pong'
+test: False
+
+epsilon: 1.0
+annealing: True
+final_epsilon: .1
+test_epsilon: 0
+annealing_start: 50000
+annealing_steps: 1000000
+
+ddqn: False
+network_size: 'nature'  # `large`=nips paper model, `nature`=nature paper model
+gamma: 1.0
+learning_rate: 0.00025
+minibatch_size: 32
+history_len: 4
+replay_max_size: 1000000
+replay_min_size: 50000
+learning_frequency: 4
+update_freq: 10000
+action_dim: 1
+reward_dim: 1
+normalize: 255.
+
+event: negative  # type of score to be seen as an event
+sided_Q: grit
