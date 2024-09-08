@@ -1,0 +1,9 @@
+__pycache__
+.DS_Store
+*.bat 
+*.pyc
+*.pdf
+*.pkl
+*.png
+*.jpg
+*.csv
