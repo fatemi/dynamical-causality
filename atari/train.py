@@ -15,7 +15,7 @@ np.set_printoptions(suppress=True, linewidth=200, precision=2)
 
 
 @click.command()
-@click.option('--domain', '-d', default='catch', help="'catch' or 'atari'")
+@click.option('--domain', '-d', default='atari', help="'catch' or 'atari'")
 @click.option('--options', '-o', multiple=True, nargs=2, type=click.Tuple([str, str]))
 def run(domain, options):
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -54,14 +54,13 @@ def run(domain, options):
         print('\n')
         print('>>>>> Experiment ', ex, ' >>>>>')
         print('\n')
-        network_size = 'small' if env.state_shape[0] < 80 else params['network_size']  # always use small for catch
         ai = RL(state_shape=env.state_shape, nb_actions=env.nb_actions, action_dim=params['action_dim'],
                 reward_dim=params['reward_dim'], history_len=params['history_len'], gamma=params['gamma'], 
                 learning_rate=params['learning_rate'], epsilon=params['epsilon'], final_epsilon=params['final_epsilon'],
                 test_epsilon=params['test_epsilon'], annealing_steps=params['annealing_steps'], minibatch_size=params['minibatch_size'],
                 replay_max_size=params['replay_max_size'], update_freq=params['update_freq'], 
-                learning_frequency=params['learning_frequency'], ddqn=params['ddqn'], network_size=network_size, 
-                normalize=params['normalize'], event=params['event'], sided_Q=params['sided_Q'], rng=random_state, device=device)
+                learning_frequency=params['learning_frequency'], ddqn=params['ddqn'], normalize=params['normalize'],
+                event=params['event'], sided_Q=params['sided_Q'], rng=random_state, device=device)
         if params['test']:  # note to pass correct folder name
             network_weights_file = os.path.join(ROOT_DIR, 'results', params['folder_name'],
                                                 'q_network_weights.pt')

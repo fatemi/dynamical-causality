@@ -1,5 +1,5 @@
 game_name: 'pong'
-device: 'cpu'  # make sure using `cuda` on GPU servers
+device: 'cuda'  # make sure using `cuda` on GPU servers
 screen_size: 84
 frame_skip: 4
 terminal_on_life_loss: False
@@ -28,7 +28,6 @@ annealing_start: 50000
 annealing_steps: 1000000
 
 ddqn: False
-network_size: 'nature'  # `large`=nips paper model, `nature`=nature paper model
 gamma: 1.0
 learning_rate: 0.00025
 minibatch_size: 32

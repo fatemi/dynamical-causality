@@ -10,8 +10,8 @@ import torch.optim as optim
 class RL(object):
     def __init__(self, state_shape, nb_actions, action_dim, reward_dim, history_len, gamma,
                  learning_rate, epsilon, final_epsilon, test_epsilon, annealing_steps,
-                 minibatch_size, replay_max_size, update_freq, learning_frequency, ddqn,
-                 network_size, normalize, event, sided_Q, rng, device):
+                 minibatch_size, replay_max_size, update_freq, learning_frequency, ddqn, 
+                 normalize, event, sided_Q, rng, device):
         """
         `event` : negative / positive
         `sided_Q` : grit / reachability
@@ -30,7 +30,6 @@ class RL(object):
         self.final_epsilon = final_epsilon
         self.decay_steps = annealing_steps
         self.minibatch_size = minibatch_size
-        self.network_size = network_size
         self.update_freq = update_freq
         self.update_counter = 0
         self.normalize = normalize
@@ -52,14 +51,7 @@ class RL(object):
         self.sided_Q = sided_Q
 
     def _build_network(self):
-        if self.network_size == 'small':
-            return Network()
-        elif self.network_size == 'large':
-            return LargeNetwork(state_shape=self.state_shape, nb_channels=4, nb_actions=self.nb_actions)
-        elif self.network_size == 'nature':
-            return NatureNetwork(state_shape=self.state_shape, nb_channels=4, nb_actions=self.nb_actions)
-        else:
-            raise ValueError('Invalid network_size.')
+        return NatureNetwork(state_shape=self.state_shape, nb_channels=4, nb_actions=self.nb_actions)
 
     def train_on_batch(self, s, a, r, s2, t):
         s = torch.FloatTensor(np.float32(s)).to(self.device)
