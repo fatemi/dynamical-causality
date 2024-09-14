@@ -1,6 +1,12 @@
 # Dynamical Causality: A Dynamical View of the Question of Why
 
-This repository hosts the code release for the paper ["A Dynamical View of the Question of Why"](https://arxiv.org/abs/2402.10240), published at **ICLR 2024**. This work was done by [Mehdi Fatemi](https://www.linkedin.com/in/fatemi/) (Wand.ai) and [Sindhu Gowda](https://sindhucmgowda.github.io/) (University of Toronto and Vector Institute).
+This repository hosts the code release for the paper ["A Dynamical View of the Question of Why"](https://arxiv.org/abs/2402.10240), published at [**ICLR 2024**](https://iclr.cc/Conferences/2024).
+
+This work was done by 
+
+* [**Mehdi Fatemi**](https://www.linkedin.com/in/fatemi/) ([Wand.ai](https://wand.ai/)) 
+
+* [**Sindhu Gowda**](https://sindhucmgowda.github.io/) (University of Toronto and Vector Institute).
 
 We release a flexible codebase, which enables replicating the experimental results (and plots) presented in the paper. The codebase can be used for further study/analysis of various forms. As we believe this paper provides a new avenue for further research, this codebase can also be used as the basis for pursuing various new ideas and possible future work. We do encourage collaborations. 
 
@@ -42,6 +48,10 @@ In order to train the Q-Network for Pong, you will need to run the following com
 python train.py
 ```
 You can pass various training parameters to the above command using the flag `-o` (e.g., `-o num_epochs 100`), or rather adjust them directly inside the `./atari/config_atari.yaml` file. The trainer will make a folder akin to the one provided above and dump the trained model at the end of each epoch (1 million frames by default). The one provided above is after 200 epochs. 
+
+### NOTE: 
+
+We have deliberately provided the Q-Network training in a very basic and clean form without using more advanced algorithms, over-engineering, or additional bells and whistles for speeding up, etc. This offers clarity and readibility, as well as ease of scrutiny. If you would like to use a Q-Network trained by other [Pytorch] frameworks, **make sure to use $\gamma = 1$** and not 0.99, as it is the common/default practice. Next, you will need to implement something similar to the `get_grad` [method in the RL class](https://github.com/fatemi/dynamical-causality/blob/main/atari/rl.py#L139). Finally, you should modify `analysis.ipynb` accordingly [it is a bit of extra work but should not be difficult]. 
 
 ## Real-world Diabetes Simulator
 
